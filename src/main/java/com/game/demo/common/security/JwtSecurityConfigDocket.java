@@ -21,6 +21,8 @@ public class JwtSecurityConfigDocket {
 
     private static String jwtSecret;
 
+    private static Boolean logoutEnable;
+
 //    public JwtSecurityConfigDocket userDetails(UserDetails userDetails){
 //        this.userDetails = userDetails;
 //        return this;
@@ -60,6 +62,15 @@ public class JwtSecurityConfigDocket {
 
     public JwtSecurityConfigDocket setJwtSecret(String jwtSecret) {
         JwtSecurityConfigDocket.jwtSecret = jwtSecret;
+        return this;
+    }
+
+    public static Boolean getLogoutEnable() {
+        return logoutEnable;
+    }
+
+    public JwtSecurityConfigDocket setLogoutEnable(Boolean status){
+        JwtSecurityConfigDocket.logoutEnable = status;
         return this;
     }
 }

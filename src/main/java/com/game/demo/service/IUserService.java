@@ -15,4 +15,5 @@ public interface IUserService {
     public String register(final RegisterParams registerParams);
     public String login(final LoginParams loginParams);
     public UserInfo getInfo();
+    public String logout(String token);
 }

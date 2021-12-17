@@ -1,15 +1,19 @@
 package com.game.demo.common.security.interceptor;
 
+import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.game.demo.common.security.JwtSecurityConfigDocket;
+import com.game.demo.common.security.annotion.BanUserSign;
 import com.game.demo.common.security.annotion.CheckAuthorize;
+import com.game.demo.common.security.ban.AbstractBanUser;
 import com.game.demo.common.security.context.BaseContextHandler;
 import com.game.demo.common.security.entity.UserDetails;
+import com.game.demo.common.security.utils.ApplicationContextProvider;
 import com.game.demo.common.security.utils.DecodeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -17,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +34,9 @@ public class JwtInterceptor implements HandlerInterceptor {
 
     private static final Logger log = LoggerFactory.getLogger(JwtInterceptor.class);
 
+    @Autowired
+    private ApplicationContextProvider applicationContextProvider;
+
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object object) throws IOException {
         String token = httpServletRequest.getHeader("Authorization");// 从 http 请求头中取出 token
@@ -42,6 +48,28 @@ public class JwtInterceptor implements HandlerInterceptor {
         Method method = handlerMethod.getMethod();
         //检查是否有CheckAuthorize注释
         if (method.isAnnotationPresent(CheckAuthorize.class)) {
+            if (JwtSecurityConfigDocket.getLogoutEnable()){
+                Map<String, Object> beans = applicationContextProvider.getApplicationContext().getBeansWithAnnotation(BanUserSign.class);
+                for (Map.Entry<String, Object> entry : beans.entrySet()){
+                    if (entry.getValue() instanceof AbstractBanUser){
+                        //TODO 若已实现接口方法执行以下代码
+                        if (((AbstractBanUser) entry.getValue()).get(token) == Boolean.FALSE){
+                            String json = "{\"success\":false,\"msg\":\"token已被注销\"}";
+                            httpServletResponse.setStatus(403);
+                            httpServletResponse.setCharacterEncoding("utf-8");
+                            httpServletResponse.setContentType("application/json; charset=utf-8");
+                            httpServletResponse.getWriter().write(json);
+                            httpServletResponse.getWriter().flush();
+                            httpServletResponse.getWriter().close();
+                            log.info("携带黑名单的token，请求已被拦截");
+                            return false;
+                        }
+                    }
+                    else{
+                        throw new RuntimeException("请实现AbstractBanUser接口");
+                    }
+                }
+            }
             CheckAuthorize checkAuthorize = method.getAnnotation(CheckAuthorize.class);
             for (String oneType : checkAuthorize.type()) {
                 if (!JwtSecurityConfigDocket.getRoleSet().contains(oneType)) {
@@ -52,7 +80,7 @@ public class JwtInterceptor implements HandlerInterceptor {
                 //执行认证
                 if (token == null || token.equals("")) {
                     String json = "{\"success\":false,\"msg\":\"传递的token为空\"}";
-                    httpServletResponse.setStatus(403);
+                    httpServletResponse.setStatus(401);
                     httpServletResponse.setCharacterEncoding("utf-8");
                     httpServletResponse.setContentType("application/json; charset=utf-8");
                     httpServletResponse.getWriter().write(json);
@@ -77,6 +105,16 @@ public class JwtInterceptor implements HandlerInterceptor {
                 } catch (SignatureVerificationException e){
                     log.info("签名不正确");
                     String json = "{\"success\":false,\"msg\":\"签名不正确\"}";
+                    httpServletResponse.setStatus(403);
+                    httpServletResponse.setCharacterEncoding("utf-8");
+                    httpServletResponse.setContentType("application/json; charset=utf-8");
+                    httpServletResponse.getWriter().write(json);
+                    httpServletResponse.getWriter().flush();
+                    httpServletResponse.getWriter().close();
+                    return false;
+                } catch (JWTDecodeException e){
+                    log.warn("签名解析失败");
+                    String json = "{\"success\":false,\"msg\":\"签名解析失败\"}";
                     httpServletResponse.setStatus(403);
                     httpServletResponse.setCharacterEncoding("utf-8");
                     httpServletResponse.setContentType("application/json; charset=utf-8");

@@ -70,10 +70,9 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ExceptionHandler(value = DuplicateKeyException.class)
     public CommonResult<String> handleValidException(DuplicateKeyException e) {
-        String a = e.getCause().getMessage();
-        int b = a.lastIndexOf("'", a.length() - 2);
-        String c = a.substring(b + 1, a.length() - 1);
-        SQLDuplicateKeyExceptionConstants message = SQLDuplicateKeyExceptionConstants.analysis(c);
+        int beginIndex = e.getCause().getMessage().lastIndexOf("'", e.getCause().getMessage().length() - 2);
+        String index = e.getCause().getMessage().substring(beginIndex + 1, e.getCause().getMessage().length() - 1);
+        SQLDuplicateKeyExceptionConstants message = SQLDuplicateKeyExceptionConstants.analysis(index);
         if (message == null){
             throw new RuntimeException("请输入对应的SQLDuplicateKeyExceptionConstants类");
         }
@@ -86,6 +85,6 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ExceptionHandler(value = RuntimeException.class)
     public CommonResult<String> handleValidException(RuntimeException e) {
-        return CommonResult.validateFailed(e.getMessage());
+        return CommonResult.failed(e.getMessage());
     }
 }
