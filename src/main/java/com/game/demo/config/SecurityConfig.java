@@ -21,6 +21,6 @@ public class SecurityConfig {
     public void createConfig(){
         Set<String> objects1 = new HashSet<>();
         objects1.add("3");
-        new JwtSecurityConfigDocket().setJwtExpiredTime(3600000L).setJwtSecret("111111").setJwtIssuer("abc").setRoleSet(objects1);
+        new JwtSecurityConfigDocket().setJwtExpiredTime(3600000L).setJwtSecret("111111").setJwtIssuer("abc").setRoleSet(objects1).setLogoutEnable(Boolean.TRUE);
     }
 }

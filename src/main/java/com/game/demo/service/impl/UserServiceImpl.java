@@ -3,6 +3,7 @@ package com.game.demo.service.impl;
 import cn.hutool.crypto.digest.BCrypt;
 import com.game.demo.common.security.context.BaseContextHandler;
 import com.game.demo.common.security.utils.GenerateJwt;
+import com.game.demo.config.BanUser;
 import com.game.demo.dto.LoginParams;
 import com.game.demo.dto.RegisterParams;
 import com.game.demo.dto.UserInfo;
@@ -40,6 +41,9 @@ public class UserServiceImpl implements IUserService {
 
     @Value("${system.usernamePrefix}")
     private String usernamePrefix;
+
+    @Resource
+    private BanUser banUser;
 
     @Override
     public String register(RegisterParams registerParams) {
@@ -104,5 +108,10 @@ public class UserServiceImpl implements IUserService {
     public UserInfo getInfo() {
         String userId = BaseContextHandler.getUserId();
         return userMapper.getUserByUsername(userId);
+    }
+
+    @Override
+    public String logout(String token) {
+        return banUser.set(token) == Boolean.TRUE ? "操作成功" : "操作失败";
     }
 }

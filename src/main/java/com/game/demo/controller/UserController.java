@@ -53,4 +53,10 @@ public class UserController {
         return CommonResult.success(user);
     }
 
+    @RequestMapping(value = "/get", method = RequestMethod.POST)
+    @ApiOperation("登出账号")
+    public CommonResult<String> logout(HttpServletRequest request){
+        String res = iUserService.logout(request.getHeader("Authorization"));
+        return CommonResult.success(res);
+    }
 }

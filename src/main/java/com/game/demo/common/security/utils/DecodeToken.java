@@ -34,7 +34,7 @@ public class DecodeToken {
     private static final String KEY_ROLES = "roles";
 
     public static UserDetails get(String token) throws JsonProcessingException, IllegalAccessException {
-        System.out.println(JwtSecurityConfigDocket.getJwtSecret());
+        //System.out.println(JwtSecurityConfigDocket.getJwtSecret());
 
         Algorithm algorithm = Algorithm.HMAC256(JwtSecurityConfigDocket.getJwtSecret());
 
