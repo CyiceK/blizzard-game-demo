@@ -85,6 +85,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ExceptionHandler(value = RuntimeException.class)
     public CommonResult<String> handleValidException(RuntimeException e) {
+        e.printStackTrace();
         return CommonResult.failed(e.getMessage());
     }
 }
