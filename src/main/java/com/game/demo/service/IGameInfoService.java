@@ -1,5 +1,6 @@
 package com.game.demo.service;
 
+import com.game.demo.dto.CommodityAboutInfo;
 import com.game.demo.dto.HomeInfo;
 
 /**
@@ -10,4 +11,5 @@ import com.game.demo.dto.HomeInfo;
  */
 public interface IGameInfoService {
     public HomeInfo getHomeInfo();
+    public CommodityAboutInfo getCommodityInfo(Integer commodityId);
 }

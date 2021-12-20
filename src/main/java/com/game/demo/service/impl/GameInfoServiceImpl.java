@@ -1,5 +1,6 @@
 package com.game.demo.service.impl;
 
+import com.game.demo.dto.CommodityAboutInfo;
 import com.game.demo.dto.GameListIcon;
 import com.game.demo.dto.GameSmallShow;
 import com.game.demo.dto.HomeInfo;
@@ -67,8 +68,8 @@ public class GameInfoServiceImpl implements IGameInfoService {
         arrayList.add(10);
         for (Integer i : arrayList){
             Commodity allInfoById = commodityMapper.getAllInfoById(i);
-            gameSmallShows.add(new GameSmallShow(allInfoById.getBg_img_url(), allInfoById.getJump(), allInfoById.getText(),
-                    allInfoById.getIcon_type(), allInfoById.getGolden(), allInfoById.getWhite(), allInfoById.getPrice(),
+            gameSmallShows.add(new GameSmallShow(allInfoById.getBgImgUrl(), String.valueOf(allInfoById.getId()), allInfoById.getText(),
+                    allInfoById.getIconType(), allInfoById.getGolden(), allInfoById.getWhite(), allInfoById.getPrice(),
                     allInfoById.getDiscount(), allInfoById.getPrice().multiply(BigDecimal.valueOf(allInfoById.getDiscount()))));
         }
         homeInfo.setRecommend(gameSmallShows);
@@ -79,5 +80,19 @@ public class GameInfoServiceImpl implements IGameInfoService {
 
 
         return homeInfo;
+    }
+
+    @Override
+    public CommodityAboutInfo getCommodityInfo(Integer commodityId) {
+
+        //TODO 从数据库中获取数据
+        Commodity commodity = commodityMapper.GetCommodity(commodityId);
+
+        //TODO 填充数据进入DTO
+        CommodityAboutInfo commodityAboutInfo = new CommodityAboutInfo(commodity.getBigBgUrl(), commodity.getShowIconUrl(),
+                commodity.getWhite(), commodity.getText(), commodity.getPrice(), commodity.getDiscount(),
+                commodity.getPrice().multiply(BigDecimal.valueOf(commodity.getDiscount())));
+
+        return commodityAboutInfo;
     }
 }

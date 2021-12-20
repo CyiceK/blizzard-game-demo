@@ -1,5 +1,6 @@
 package com.game.demo.controller;
 
+import com.game.demo.dto.CommodityAboutInfo;
 import com.game.demo.dto.HomeInfo;
 import com.game.demo.service.IGameInfoService;
 import com.game.demo.utils.api.CommonResult;
@@ -21,16 +22,23 @@ import javax.servlet.http.HttpServletRequest;
  */
 
 @RestController
-@RequestMapping("/game_info")
+@RequestMapping("/gameInfo")
 public class GameInfoController {
 
     @Resource
     private IGameInfoService iGameInfoService;
 
-    @RequestMapping(value = "/getHomeInfo", method = RequestMethod.GET)
+    @RequestMapping(value = "/HomeInfo", method = RequestMethod.GET)
     @ApiOperation("获取主页数据")
-    public CommonResult<HomeInfo> register(HttpServletRequest request){
+    public CommonResult<HomeInfo> getHomeInfo(HttpServletRequest request){
         HomeInfo homeInfo = iGameInfoService.getHomeInfo();
         return CommonResult.success(homeInfo);
+    }
+
+    @RequestMapping(value = "/CommodityInfo", method = RequestMethod.GET)
+    @ApiOperation("获取商品详情页数据")
+    public CommonResult<CommodityAboutInfo> getCommodityInfo(HttpServletRequest request, final Integer commodityId){
+        CommodityAboutInfo commodityInfo = iGameInfoService.getCommodityInfo(commodityId);
+        return CommonResult.success(commodityInfo);
     }
 }
