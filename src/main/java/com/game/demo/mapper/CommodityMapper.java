@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p></p>
@@ -20,4 +21,7 @@ public interface CommodityMapper extends BaseMapper<Commodity> {
 
     @Select("SELECT * FROM commodity WHERE ID = #{id, jdbcType=INTEGER}")
     public Commodity getAllInfoById(@Param("id") Integer id);
+
+    @Select("SELECT id,text,white,price,discount,big_bg_url FROM commodity WHERE ID = #{id, jdbcType=INTEGER}")
+    public Commodity GetCommodity(@Param("id") Integer id);
 }

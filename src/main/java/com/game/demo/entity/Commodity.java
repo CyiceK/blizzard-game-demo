@@ -20,13 +20,11 @@ public class Commodity implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    private String bg_img_url;
-
-    private String jump;
+    private String bgImgUrl;
 
     private String text;
 
-    private Integer icon_type;
+    private Integer iconType;
 
     private String golden;
 
@@ -34,44 +32,49 @@ public class Commodity implements Serializable {
 
     private BigDecimal price;
 
-    private Integer game_id;
+    private Integer gameId;
 
     private Double discount;
 
     private Integer typeId;
 
+    private String bigBgUrl;
+
+    private String showIconUrl;
+
     public Commodity() {
     }
 
-    public Commodity(Integer id, String bg_img_url, String jump, String text, Integer icon_type, String golden,
-                     String white, BigDecimal price, Integer game_id, Double discount, Integer typeId) {
+    public Commodity(Integer id, String bgImgUrl, String text, Integer iconType, String golden, String white,
+                     BigDecimal price, Integer gameId, Double discount, Integer typeId, String bigBgUrl, String showIconUrl) {
         this.id = id;
-        this.bg_img_url = bg_img_url;
-        this.jump = jump;
+        this.bgImgUrl = bgImgUrl;
         this.text = text;
-        this.icon_type = icon_type;
+        this.iconType = iconType;
         this.golden = golden;
         this.white = white;
         this.price = price;
-        this.game_id = game_id;
+        this.gameId = gameId;
         this.discount = discount;
         this.typeId = typeId;
+        this.bigBgUrl = bigBgUrl;
+        this.showIconUrl = showIconUrl;
     }
 
-    public String getBg_img_url() {
-        return bg_img_url;
+    public Integer getId() {
+        return id;
     }
 
-    public void setBg_img_url(String bg_img_url) {
-        this.bg_img_url = bg_img_url;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getJump() {
-        return jump;
+    public String getBgImgUrl() {
+        return bgImgUrl;
     }
 
-    public void setJump(String jump) {
-        this.jump = jump;
+    public void setBgImgUrl(String bgImgUrl) {
+        this.bgImgUrl = bgImgUrl;
     }
 
     public String getText() {
@@ -82,12 +85,12 @@ public class Commodity implements Serializable {
         this.text = text;
     }
 
-    public Integer getIcon_type() {
-        return icon_type;
+    public Integer getIconType() {
+        return iconType;
     }
 
-    public void setIcon_type(Integer icon_type) {
-        this.icon_type = icon_type;
+    public void setIconType(Integer iconType) {
+        this.iconType = iconType;
     }
 
     public String getGolden() {
@@ -114,12 +117,12 @@ public class Commodity implements Serializable {
         this.price = price;
     }
 
-    public Integer getGame_id() {
-        return game_id;
+    public Integer getGameId() {
+        return gameId;
     }
 
-    public void setGame_id(Integer game_id) {
-        this.game_id = game_id;
+    public void setGameId(Integer gameId) {
+        this.gameId = gameId;
     }
 
     public Double getDiscount() {
@@ -130,27 +133,45 @@ public class Commodity implements Serializable {
         this.discount = discount;
     }
 
-    public Integer getType() {
+    public Integer getTypeId() {
         return typeId;
     }
 
-    public void setType(Integer type) {
-        this.typeId = type;
+    public void setTypeId(Integer typeId) {
+        this.typeId = typeId;
+    }
+
+    public String getBigBgUrl() {
+        return bigBgUrl;
+    }
+
+    public void setBigBgUrl(String bigBgUrl) {
+        this.bigBgUrl = bigBgUrl;
+    }
+
+    public String getShowIconUrl() {
+        return showIconUrl;
+    }
+
+    public void setShowIconUrl(String showIconUrl) {
+        this.showIconUrl = showIconUrl;
     }
 
     @Override
     public String toString() {
         return "Commodity{" +
-                "bg_img_url='" + bg_img_url + '\'' +
-                ", jump='" + jump + '\'' +
+                "id=" + id +
+                ", bgImgUrl='" + bgImgUrl + '\'' +
                 ", text='" + text + '\'' +
-                ", icon_type=" + icon_type +
+                ", iconType=" + iconType +
                 ", golden='" + golden + '\'' +
                 ", white='" + white + '\'' +
                 ", price=" + price +
-                ", game_id=" + game_id +
-                ", discount='" + discount + '\'' +
-                ", type_id='" + typeId + '\'' +
+                ", gameId=" + gameId +
+                ", discount=" + discount +
+                ", typeId=" + typeId +
+                ", bigBgUrl='" + bigBgUrl + '\'' +
+                ", showIconUrl='" + showIconUrl + '\'' +
                 '}';
     }
 }

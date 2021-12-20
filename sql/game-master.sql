@@ -11,7 +11,7 @@
  Target Server Version : 80019
  File Encoding         : 65001
 
- Date: 19/12/2021 19:58:33
+ Date: 20/12/2021 16:22:12
 */
 
 SET NAMES utf8mb4;
@@ -33,22 +33,24 @@ CREATE TABLE `commodity`  (
   `game_id` int(0) NOT NULL,
   `discount` double NOT NULL,
   `type_id` int(0) NULL DEFAULT NULL,
+  `big_bg_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `show_icon_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of commodity
 -- ----------------------------
-INSERT INTO `commodity` VALUES (1, 'http://product.cnc.blzstatic.cn//36/66a9f4f80640962dff8bc1ae43d9f0d0-WoW_9.0_ProductPage_ASIA_Collection_ProductCard_Vert_Epic_MN01.jpg', 'http:1223', '《魔兽世界®:暗影国度》数字礼包', 1, '立即购买', '礼包', 198.00, 2, 0, 1);
-INSERT INTO `commodity` VALUES (2, 'http://product.cnc.blzstatic.cn//fb7/e21ed11c2dedfd884e0aea0df46cd4c6-prod-card-tall.jpg', 'http:1223', '《星际争霸Ⅱ》:战争宝箱6', 7, '下架时间:2020年9月2日', '礼包', 60.00, 2, 0, 26);
-INSERT INTO `commodity` VALUES (3, 'http://product.cnc.blzstatic.cn//27/ac8817e4c0cfc2f6b4fd66d99cf4ce88-prod-card-tall.jpg', 'http:1223', '《守望先锋®》游戏货币:赠送补给', 0, '', '可解锁内容', 12.00, 2, 0, 8);
-INSERT INTO `commodity` VALUES (4, 'http://product.cnc.blzstatic.cn//2/2f4190e5b4ee1680a72680ccd65de657-prod-card-vert.jpg', 'http:1223', '炉石传说®:外域的灰烬', 2, '最新扩展包!', '卡牌包', 180.00, 2, 0, 13);
-INSERT INTO `commodity` VALUES (5, 'http://product.cnc.blzstatic.cn//ff6/856907e8e87225f5ed1e891655283bed-HS_CN_Rune_Shop_Product_Pages_prod-card-vert_TS01.jpg', 'http:1223', '《炉石传说®》', 2, '', '可解锁内容', 30.00, 2, 0, 12);
-INSERT INTO `commodity` VALUES (6, 'http://product.cnc.blzstatic.cn//fe6/89fa735b8b71abd3660695dab3e937ae-prod-card-tall.jpg', 'http:1223', '《守望先锋®》:传奇典藏版', 0, '', '团队设计游戏', 158.00, 2, 0, 7);
-INSERT INTO `commodity` VALUES (7, 'http://product.cnc.blzstatic.cn//5f/3d885e4077747a04a646186a17607769-WC3R_2020_Orc_Art_Shop_Product_Page_Assets_prod-card-vert_TS03.jpg', 'http:1223', '《魔兽争霸Ⅲ》:重制版', 4, '立即购买!', '即时策略游戏', 168.00, 2, 0, 31);
-INSERT INTO `commodity` VALUES (8, 'http://product.cnc.blzstatic.cn//fad/f857b83256b2a93ae6ac56c85050c99f-HS_16.2_Prepurch_prod-card-vert_BK01.png', 'http:1223', '\"迦拉克隆的觉醒\"冒险模式', 2, '', '冒险模式', 128.00, 2, 0, 14);
-INSERT INTO `commodity` VALUES (9, 'http://product.cnc.blzstatic.cn//4b/cd69d541bb3ba43461c757ecc7755bfd-HS16_product-pageprod-card-vert-pack.jpg', 'http:1223', '巨龙降临', 2, '', '卡牌包', 180.00, 2, 0, 13);
-INSERT INTO `commodity` VALUES (10, 'http://product.cnc.blzstatic.cn//26/fe94b086ae36a98b7e2974a7841d51db-HS_CN_Orb_Shop_Product_Pages_prod-card-vert_TS01.jpg', 'http:1223', '10奥术宝珠', 2, '', '可解锁内容', 1.00, 2, 0, 17);
+INSERT INTO `commodity` VALUES (1, 'http://product.cnc.blzstatic.cn//36/66a9f4f80640962dff8bc1ae43d9f0d0-WoW_9.0_ProductPage_ASIA_Collection_ProductCard_Vert_Epic_MN01.jpg', '', '《魔兽世界®:暗影国度》数字礼包', 1, '立即购买', '礼包', 198.00, 1, 0, 1, 'https://product.cnc.blzstatic.cn//f88/2273aa0b3225e6c6f8c281a6c94ac6a4-WoW_Sub_Product_Pageprod-mobile-bg-1536x1000.png', NULL);
+INSERT INTO `commodity` VALUES (2, 'http://product.cnc.blzstatic.cn//fb7/e21ed11c2dedfd884e0aea0df46cd4c6-prod-card-tall.jpg', '', '《星际争霸Ⅱ》:战争宝箱6', 7, '下架时间:2020年9月2日', '礼包', 60.00, 6, 0, 26, 'https://product.cnc.blzstatic.cn//25/3c8d2a1e5f04172ffd945e4296c0f3cc-prod-mobile-bg.png', NULL);
+INSERT INTO `commodity` VALUES (3, 'http://product.cnc.blzstatic.cn//27/ac8817e4c0cfc2f6b4fd66d99cf4ce88-prod-card-tall.jpg', '', '《守望先锋®》游戏货币:赠送补给', 0, '', '可解锁内容', 12.00, 2, 0, 8, 'https://product.cnc.blzstatic.cn//55/0060a9085524e0cf12aac9701d0d5071-prod-full-bg.jpg', NULL);
+INSERT INTO `commodity` VALUES (4, 'http://product.cnc.blzstatic.cn//2/2f4190e5b4ee1680a72680ccd65de657-prod-card-vert.jpg', '', '炉石传说®:外域的灰烬', 2, '最新扩展包!', '卡牌包', 180.00, 4, 0, 13, 'https://product.cnc.blzstatic.cn//fba/6cf6eb24053574260b826685326b54f0-prod-mobile-bg.jpg', NULL);
+INSERT INTO `commodity` VALUES (5, 'http://product.cnc.blzstatic.cn//ff6/856907e8e87225f5ed1e891655283bed-HS_CN_Rune_Shop_Product_Pages_prod-card-vert_TS01.jpg', '', '《炉石传说®》', 2, '', '可解锁内容', 30.00, 4, 0, 12, 'https://product.cnc.blzstatic.cn//fac/895ca992a21d9c960bd30f9738d7bfb8-prod-mobile-bg.jpg', NULL);
+INSERT INTO `commodity` VALUES (6, 'http://product.cnc.blzstatic.cn//fe6/89fa735b8b71abd3660695dab3e937ae-prod-card-tall.jpg', '', '《守望先锋®》:传奇典藏版', 0, '', '团队设计游戏', 158.00, 2, 0, 7, 'https://product.cnc.blzstatic.cn//e/f48d35fbdb32d8f70200dd6c36cf6202-prod-mobile-bg2.jpg', 'https://product.cnc.blzstatic.cn//f9a/7f5bf30fc831da74fb8ae1cf05a1cbe0-overwatch-cn-1000.png');
+INSERT INTO `commodity` VALUES (7, 'http://product.cnc.blzstatic.cn//5f/3d885e4077747a04a646186a17607769-WC3R_2020_Orc_Art_Shop_Product_Page_Assets_prod-card-vert_TS03.jpg', '', '《魔兽争霸Ⅲ》:重制版', 4, '立即购买!', '即时策略游戏', 168.00, 8, 0, 31, 'https://product.cnc.blzstatic.cn//fbc/f66923163a6c1e5ec2c2888d003a2f0a-WC3R_2020_Orc_Art_Shop_Product_Page_Assets_prod-thumb_TS03.jpg', NULL);
+INSERT INTO `commodity` VALUES (8, 'http://product.cnc.blzstatic.cn//fad/f857b83256b2a93ae6ac56c85050c99f-HS_16.2_Prepurch_prod-card-vert_BK01.png', '', '\"迦拉克隆的觉醒\"冒险模式', 2, '', '冒险模式', 128.00, 4, 0, 14, 'https://product.cnc.blzstatic.cn//74/4d274f21c827751e94560fbc0f28dee2-HS_16.2_Prepurch_prod-mobile-bg_BK01.png', NULL);
+INSERT INTO `commodity` VALUES (9, 'http://product.cnc.blzstatic.cn//4b/cd69d541bb3ba43461c757ecc7755bfd-HS16_product-pageprod-card-vert-pack.jpg', '', '巨龙降临', 2, '', '卡牌包', 180.00, 4, 0, 13, 'https://product.cnc.blzstatic.cn//fd4/edb264bb8f34ff9004cb8fd2c1837971-prod-mobile-bg.jpg', NULL);
+INSERT INTO `commodity` VALUES (10, 'http://product.cnc.blzstatic.cn//26/fe94b086ae36a98b7e2974a7841d51db-HS_CN_Orb_Shop_Product_Pages_prod-card-vert_TS01.jpg', '', '10奥术宝珠', 2, '', '可解锁内容', 1.00, 4, 0, 17, 'https://product.cnc.blzstatic.cn//fe8/4f3b2fbe608fda82942dd8bedea92953-HS_CN_Orb_Shop_Product_Pages_prod-mobile-bg_TS01.jpg', NULL);
 
 -- ----------------------------
 -- Table structure for game
@@ -89,7 +91,7 @@ CREATE TABLE `game_commodity_type`  (
   `game_id` int(0) UNSIGNED NOT NULL,
   `text` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of game_commodity_type
@@ -139,7 +141,7 @@ CREATE TABLE `rotation`  (
   `announcement` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `jump` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of rotation
